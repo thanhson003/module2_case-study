@@ -1,0 +1,43 @@
+package manager;
+
+import model.Student;
+import repository.StudentRepository;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+public class StudentManager {
+        private final StudentRepository repo;
+        private final Map<String, Student> students;
+
+        public StudentManager(StudentRepository repo) {
+                this.repo = repo;
+                this.students = repo.loadAll();
+        }
+
+        public boolean add(Student s) {
+                if (students.containsKey(s.getId().toUpperCase())) return false;
+                students.put(s.getId().toUpperCase(), s);
+                repo.saveAll(students);
+                return true;
+        }
+
+        public List<Student> searchByName(String name) {
+                return students.values().stream()
+                        .filter(s -> s.getName().toLowerCase().contains(name.toLowerCase()))
+                        .toList();
+        }
+
+        public Student findById(String id) {
+                return students.get(id.toUpperCase());
+        }
+
+        public void saveChanges() {
+                repo.saveAll(students); // Gọi hàm saveAll của Repository
+        }
+
+        public Collection<Student> getAll() {
+                return students.values();
+        }
+}
