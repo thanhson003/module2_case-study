@@ -13,8 +13,8 @@ public class Main {
 
         StudentRepository repo = new FileStudentRepository();
         StudentManager service = new StudentManager(repo);
+        new manager.Professional(service);
         ConsoleView view = new ConsoleView(service);
-
         view.start();
     }
 }

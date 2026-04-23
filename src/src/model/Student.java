@@ -4,26 +4,23 @@ public class Student extends Person {
     private String id;
     private String email;
     private String className;
-    private double gpa;
+
     private boolean status;
     private String address;
     private Integer phoneNumber;
 
     public Student(String id, String name, String birthDate, String gender, String email,
-                   String className, double gpa, boolean status, String address, Integer phoneNumber) {
-        super();
+                   String className,  boolean status, String address, Integer phoneNumber) {
+        super(name, birthDate, gender);
         this.id = id;
         this.email = email;
         this.className = className;
-        this.gpa = gpa;
+
         this.status = status;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
-    public Student(String id, String name, String dob, String gender, String className, double gpa, boolean b, String addr, String phone) {
-        super();
-    }
 
     public String getId() {
         return id;
@@ -49,13 +46,7 @@ public class Student extends Person {
         this.className = className;
     }
 
-    public double getGpa() {
-        return gpa;
-    }
 
-    public void setGpa(double gpa) {
-        this.gpa = gpa;
-    }
 
     public boolean isStatus() {
         return status;
@@ -84,7 +75,7 @@ public class Student extends Person {
     @Override
     public String toString() {
         String statusText = status ? "Đang học" : "Đã nghỉ";
-        return String.format("ID: %-5s | %s | Lớp: %-7s | GPA: %-4.1f | TT: %-10s | Email: %-20s | ĐC: %-10s | SĐT: %-10d",
-                id, super.toString(), className, gpa, statusText, email, address, phoneNumber);
+        return String.format("ID: %-5s | %s | Lớp: %-7s | TT: %-10s | Email: %-20s | ĐC: %-10s | SĐT: %-10d",
+                id, super.toString(), className, statusText, email, address, phoneNumber);
     }
 }

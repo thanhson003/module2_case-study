@@ -5,7 +5,7 @@ public abstract class Person {
     private String birthDate;
     private String gender;
 
-    public Person() {
+    public Person(String name, String birthDate, String gender) {
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
