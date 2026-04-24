@@ -34,10 +34,19 @@ public class StudentManager {
         }
 
         public void saveChanges() {
-                repo.saveAll(students); // Gọi hàm saveAll của Repository
+                repo.saveAll(students);
         }
 
         public Collection<Student> getAll() {
                 return students.values();
+        }
+
+        public boolean delete(String id) {
+                if (students.containsKey(id.toUpperCase())) {
+                        students.remove(id.toUpperCase());
+                        repo.saveAll(students); // Lưu lại file ngay sau khi xóa
+                        return true;
+                }
+                return false;
         }
 }

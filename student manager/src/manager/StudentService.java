@@ -6,12 +6,12 @@ import validate.Validator;
 import java.util.List;
 import java.util.Scanner;
 
-public class Professional {
+public class StudentService {
     private static StudentManager manager;
     private static final Scanner sc = new Scanner(System.in);
 
-    public Professional(StudentManager manager) {
-        Professional.manager = manager;
+    public StudentService(StudentManager manager) {
+        StudentService.manager = manager;
     }
 
     private static boolean checkEmpty() {
@@ -43,7 +43,7 @@ public class Professional {
                     "Lỗi: ID phải có dạng 2 chữ in hoa và 3 số!");
 
             if (manager.findById(id) != null) {
-                System.err.println("Lỗi: ID '" + id + "' đã tồn tại trong hệ thống! Vui lòng nhập một ID khác.");
+                System.err.println("⚠️ Lỗi: ID '" + id + "' đã tồn tại trong hệ thống! Vui lòng nhập một ID khác.");
             } else {
                 break;
             }
@@ -55,6 +55,7 @@ public class Professional {
         String dob = inputWithRegex("Nhập Ngày sinh (dd/mm/yyyy): ",
                 Validator.DATE_REGEX, "Lỗi: Ngày sinh phải đúng định dạng dd/mm/yyyy!");
 
+
         String gender;
         while (true) {
             System.out.print("Giới tính (Nam/Nữ): ");
@@ -64,7 +65,7 @@ public class Professional {
                 gender = gender.substring(0, 1).toUpperCase() + gender.substring(1).toLowerCase();
                 break;
             }
-            System.err.println("Lỗi: Giới tính chỉ được nhập 'Nam' hoặc 'Nữ'!");
+            System.err.println("⚠️ Lỗi: Giới tính chỉ được nhập 'Nam' hoặc 'Nữ'!");
         }
 
         String email = inputWithRegex("Nhập Email: ",
@@ -72,23 +73,21 @@ public class Professional {
 
         System.out.print("Lớp: "); String className = sc.nextLine();
 
-
-
         System.out.print("Địa chỉ: "); String addr = sc.nextLine();
 
         String phoneStr = inputWithRegex("Nhập SĐT (10 số, bắt đầu bằng 0): ",
                 Validator.PHONE_REGEX, "Lỗi: SĐT phải đủ 10 số và bắt đầu bằng 0!");
-        Integer phone = Integer.parseInt(phoneStr);
+        String phone = sc.nextLine();
 
         if (manager.add(new Student(id, name, dob, gender, email, className,  true, addr, phone))) {
-            System.out.println(">>> Thêm thành công!");
+            System.out.println(">>> ✅ Thêm thành công! <<<");
         } else {
-            System.out.println(">>> Thất bại: ID đã tồn tại!");
+            System.out.println(">>> Thất bại: ID đã tồn tại! <<<");
         }
     }
 
 
-    public static void searchStudent() throws RuntimeException {
+    public static void searchStudent()  {
         if (checkEmpty()) return; // Kiểm tra danh sách trống
 
         System.out.println("\n--- TÌM KIẾM SINH VIÊN ---");
@@ -105,10 +104,10 @@ public class Professional {
                 Student s = manager.findById(id);
 
                 if (s != null) {
-                    System.out.println(">>> Đã tìm thấy sinh viên:");
+                    System.out.println(">>> ✅ Đã tìm thấy sinh viên:");
                     System.out.println(s);
                 } else {
-                    System.out.println("Không tìm thấy sinh viên nào có ID là: " + id);
+                    System.out.println("❌ Không tìm thấy sinh viên nào có ID là: " + id);
                 }
                 break;
 
@@ -118,19 +117,18 @@ public class Professional {
                 List<Student> result = manager.searchByName(name);
 
                 if (result.isEmpty()) {
-                    System.out.println("Không tìm thấy sinh viên nào có tên chứa từ khóa: '" + name + "'");
+                    System.out.println("❌ Không tìm thấy sinh viên nào có tên : '" + name + "'");
                 } else {
-                    System.out.println(">>> Đã tìm thấy " + result.size() + " kết quả:");
+                    System.out.println(">>> ✅ Đã tìm thấy " + result.size() + " kết quả:");
                     result.forEach(System.out::println);
                 }
                 break;
 
             default:
-                System.out.println("Lựa chọn không hợp lệ! Vui lòng chỉ nhập 1 hoặc 2.");
+                System.out.println("⚠️ Lựa chọn không hợp lệ! Vui lòng chỉ nhập 1 hoặc 2.");
                 break;
         }
     }
-
 
     public static void checkStatus() {
         if (checkEmpty()) return;
@@ -145,7 +143,7 @@ public class Professional {
             System.out.println("ID Sinh viên: " + hs.getId() + " | Tên: " + hs.getName() +
                     " | Trạng thái: " + (hs.isStatus() ? "Đang học" : "Đã nghỉ học/Tốt nghiệp"));
         } else {
-            System.out.println("Không tìm thấy sinh viên nào có ID là: " + id);
+            System.out.println("❌ Không tìm thấy sinh viên nào có ID là: " + id);
         }
     }
 
@@ -175,7 +173,7 @@ public class Professional {
             }
         }
 
-        // 2. Sửa Giới tính (Áp dụng logic Nam/Nữ bạn vừa làm)
+        // 2. Sửa Giới tính
         System.out.print("Giới tính mới [" + s.getGender() + "]: ");
         String newGender = sc.nextLine().trim();
         if (!newGender.isEmpty()) {
@@ -198,7 +196,7 @@ public class Professional {
         }
 
         // 4. Sửa Lớp
-        System.out.print("Lớp mới [" + s.getClassName() + "]: ");
+        System.out.println("Lớp mới [" + s.getClassName() + "]: ");
         String newClass = sc.nextLine().trim();
         if (!newClass.isEmpty()) s.setClassName(newClass);
 
@@ -212,7 +210,7 @@ public class Professional {
         String newPhone = sc.nextLine().trim();
         if (!newPhone.isEmpty()) {
             if (validate.Validator.validate(newPhone, validate.Validator.PHONE_REGEX)) {
-                s.setPhoneNumber(Integer.parseInt(newPhone));
+                s.setPhoneNumber(String.valueOf(Integer.parseInt(newPhone)));
             } else {
                 System.err.println("⚠️ SĐT phải có 10 số, giữ lại SĐT cũ.");
             }
@@ -224,16 +222,21 @@ public class Professional {
 
     public static void changeStatus() {
         if(checkEmpty()){ return; }
+
         System.out.print("Nhập ID sinh viên cần thay đổi trạng thái: ");
-        Student s = manager.findById(sc.nextLine());
-//        if (s != null) {
-//            s.setStatus(!s.isStatus());
-//            manager.saveChanges();
-//            System.out.println("Trạng thái mới: " + (s.isStatus() ? "Đang học" : "Đã nghỉ học/Tốt nghiệp"));
-//        }
+        String id = sc.nextLine().trim();
+        Student s = manager.findById(id);
+
+        if (s == null) {
+            System.err.println("❌ Không tìm thấy sinh viên có ID: " + id);
+            return;
+        }
+
         System.out.println("Chọn trạng thái mới:");
         System.out.println("1. Đang học");
-        System.out.println("2. Đã nghỉ học / Tốt nghiệp");
+        System.out.println("2. Bảo lưu");
+        System.out.println("3. Đã nghỉ học");
+        System.out.println("4. Tốt nghiệp");
         System.out.print("Lựa chọn của bạn: ");
         String choice = sc.nextLine().trim();
 
@@ -244,8 +247,14 @@ public class Professional {
                 break;
             case "2":
                 s.setStatus(false);
-                System.out.println("✅ Đã cập nhật: Đã nghỉ học / Tốt nghiệp");
+                System.out.println("✅ Đã cập nhật: Bảo lưu");
+            case "3":
+                s.setStatus(false);
+                System.out.println("✅ Đã cập nhật: Đã nghỉ học");
                 break;
+            case "4":
+                s.setStatus(false);
+                System.out.println("✅ Đã cập nhật: Tốt nghiệp");
             case "":
                 System.out.println("⚠️ Bạn không chọn gì, trạng thái được giữ nguyên.");
                 return;
@@ -254,9 +263,36 @@ public class Professional {
                 return;
         }
 
-        // Lưu thay đổi vào file
         manager.saveChanges();
 
+    }
+
+    public static void deleteStudent() {
+        if (checkEmpty()) return;
+
+        System.out.print("Nhập ID sinh viên muốn xóa: ");
+        String id = sc.nextLine().trim();
+        Student s = manager.findById(id);
+
+        if (s != null) {
+            System.out.println("⚠️ Bạn đang yêu cầu xóa sinh viên sau:");
+            System.out.println(s);
+
+            System.out.print("Bạn có chắc chắn muốn xóa không? (Nhập 'Y' để xóa, phím bất kỳ để hủy): ");
+            String confirm = sc.nextLine().trim();
+
+            if (confirm.equalsIgnoreCase("Y")) {
+                if (manager.delete(id)) {
+                    System.out.println("✅ Đã xóa sinh viên thành công!");
+                } else {
+                    System.err.println("❌ Có lỗi xảy ra, không thể xóa.");
+                }
+            } else {
+                System.out.println("--- Đã hủy thao tác xóa ---");
+            }
+        } else {
+            System.err.println("❌ Không tìm thấy sinh viên có ID: " + id);
+        }
     }
 
     public static void displayAll() {

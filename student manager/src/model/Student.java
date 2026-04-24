@@ -7,10 +7,10 @@ public class Student extends Person {
 
     private boolean status;
     private String address;
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     public Student(String id, String name, String birthDate, String gender, String email,
-                   String className,  boolean status, String address, Integer phoneNumber) {
+                   String className,  boolean status, String address, String phoneNumber) {
         super(name, birthDate, gender);
         this.id = id;
         this.email = email;
@@ -64,18 +64,18 @@ public class Student extends Person {
         this.address = address;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     @Override
     public String toString() {
         String statusText = status ? "Đang học" : "Đã nghỉ";
-        return String.format("ID: %-5s | %s | Lớp: %-7s | TT: %-10s | Email: %-20s | ĐC: %-10s | SĐT: %-10d",
+        return String.format("ID: %-5s | %s | Lớp: %-7s | TT: %-10s | Email: %-20s | ĐC: %-10s | SĐT: %-10s",
                 id, super.toString(), className, statusText, email, address, phoneNumber);
     }
 }

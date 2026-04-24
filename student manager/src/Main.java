@@ -1,3 +1,4 @@
+import manager.StudentService;
 import repository.FileStudentRepository;
 import repository.StudentRepository;
 import manager.StudentManager;
@@ -13,7 +14,7 @@ public class Main {
 
         StudentRepository repo = new FileStudentRepository();
         StudentManager service = new StudentManager(repo);
-        new manager.Professional(service);
+        new StudentService(service);
         ConsoleView view = new ConsoleView(service);
         view.start();
     }
