@@ -5,7 +5,6 @@ import java.io.*;
 import java.util.*;
 
 public class FileStudentRepository implements StudentRepository {
-    // Bạn nên kiểm tra lại đường dẫn này xem có đúng trong máy bạn không
     private final String fileName = "D:\\codegym\\Module_2\\Case Study\\student manager\\src\\file\\students.txt";
 
     @Override

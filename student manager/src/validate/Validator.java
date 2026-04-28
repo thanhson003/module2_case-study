@@ -10,7 +10,7 @@ public class Validator {
     public static final String ID_REGEX = "^[A-Z]{2}\\d{3}$";
 
     // Regex cho Tên: Tiếng Việt có dấu, không chứa số
-    public static final String NAME_REGEX = "^[\\p{L} ]{2,50}$";
+    public static final String NAME_REGEX = "^[\\p{L} ]{1,50}$";
 
     // Regex cho Email: chuẩn quốc tế
     public static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -23,32 +23,5 @@ public class Validator {
 
     public static boolean validate(String input, String regex) {
         return Pattern.matches(regex, input);
-    }
-
-    public static boolean validateBirthDate(String dateStr) {
-        // Bước 1: Kiểm tra định dạng cơ bản bằng Regex trước
-        if (!validate(dateStr, DATE_REGEX)) {
-            return false;
-        }
-
-        // Bước 2: Kiểm tra tính logic của thời gian thực
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        try {
-            LocalDate birthDate = LocalDate.parse(dateStr, formatter);
-            LocalDate today = LocalDate.now();
-
-            if (birthDate.isAfter(today)) {
-                return false;
-            }
-
-
-            if (birthDate.isBefore(today.minusYears(100))) {
-                return false;
-            }
-            return true;
-
-        } catch (DateTimeParseException e) {
-            return false;
-        }
     }
 }

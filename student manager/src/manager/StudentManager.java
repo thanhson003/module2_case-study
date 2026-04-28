@@ -44,7 +44,7 @@ public class StudentManager {
         public boolean delete(String id) {
                 if (students.containsKey(id.toUpperCase())) {
                         students.remove(id.toUpperCase());
-                        repo.saveAll(students); // Lưu lại file ngay sau khi xóa
+                        repo.saveAll(students);
                         return true;
                 }
                 return false;

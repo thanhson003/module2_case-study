@@ -46,8 +46,6 @@ public class Student extends Person {
         this.className = className;
     }
 
-
-
     public boolean isStatus() {
         return status;
     }

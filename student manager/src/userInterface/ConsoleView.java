@@ -17,16 +17,15 @@ public class ConsoleView {
     public void start() {
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("\n========= QUẢN LÝ HỌC SINH =========");
-            System.out.println("1. Thêm sinh viên");
-            System.out.println("2. Tìm kiếm sinh viên");
-            System.out.println("3. Kiểm tra trạng thái học");
-            System.out.println("4. Sửa thông tin sinh viên");
-            System.out.println("5. Thay đổi trạng thái học");
-            System.out.println("6. Xóa thông tin sinh viên");
-            System.out.println("7. Hiển thị danh sách sinh viên");
-            System.out.println("8. Đăng xuất");
-            System.out.print("Chọn: ");
+            System.out.println("┌────────────────────────────────────────────────────────┐");
+            System.out.println("│             🎓 HỆ THỐNG QUẢN LÝ SINH VIÊN              │");
+            System.out.println("├────────────────────────────────────────────────────────┤");
+            System.out.println("│  1. ➕ Thêm sinh viên         5. 🔄 Đổi trạng thái     │");
+            System.out.println("│  2. 🔍 Tìm kiếm               6. ❌ Xóa sinh viên      │");
+            System.out.println("│  3. 📝 Sửa thông tin          7. 📋 Hiện danh sách     │");
+            System.out.println("│  4. 🔔 Kiểm tra trạng thái    8. 🚪 Đăng xuất          │");
+            System.out.println("└────────────────────────────────────────────────────────┘");
+            System.out.print("\uD83D\uDC49 Lựa chọn của bạn:");
             String choice = sc.nextLine();
 
             switch (choice) {
@@ -38,11 +37,11 @@ public class ConsoleView {
                 case "6" : deleteStudent(); break;
                 case "7" : displayAll(); break;
                 case "8" :
-                    System.out.println("Đã đăng xuất thành công!");
+                    System.out.println("\uD83D\uDC4B Đã đăng xuất thành công!");
                     isRunning = false;
                     break;
                 case "0" : System.exit(0);
-                default : System.out.println("Lựa chọn sai! Vui lòng lựa chọn lại");
+                default : System.out.println("❌ Lựa chọn sai! Vui lòng lựa chọn lại");
             }
         }
     }
