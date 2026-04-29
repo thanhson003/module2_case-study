@@ -16,16 +16,16 @@ public class StudentManager {
                 this.students = repo.loadAll();
         }
 
-        public boolean add(Student s) {
-                if (students.containsKey(s.getId().toUpperCase())) return false;
-                students.put(s.getId().toUpperCase(), s);
+        public boolean add(Student hs) {
+                if (students.containsKey(hs.getId().toUpperCase())) return false;
+                students.put(hs.getId().toUpperCase(), hs);
                 repo.saveAll(students);
                 return true;
         }
 
         public List<Student> searchByName(String name) {
                 return students.values().stream()
-                        .filter(s -> s.getName().toLowerCase().contains(name.toLowerCase()))
+                        .filter(hs -> hs.getName().toLowerCase().contains(name.toLowerCase()))
                         .toList();
         }
 

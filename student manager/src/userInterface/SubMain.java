@@ -1,10 +1,9 @@
+package userInterface;
+
 import manager.StudentManager;
 import manager.StudentService;
 import repository.FileStudentRepository;
 import repository.StudentRepository;
-import userInterface.ConsoleView;
-
-import java.util.Scanner;
 
 import static manager.Login.logIn;
 

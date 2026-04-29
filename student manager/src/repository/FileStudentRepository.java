@@ -17,15 +17,15 @@ public class FileStudentRepository implements StudentRepository {
                 if (p.length >= 9) {
                     try {
                         Student s = new Student(
-                                p[0], // id
-                                p[1], // name
-                                p[2], // birthDate
-                                p[3], // gender
-                                p[4], // email
-                                p[5], // className
+                                p[0],                              // id
+                                p[1],                              // name
+                                p[2],                              // birthDate
+                                p[3],                              // gender
+                                p[4],                              // email
+                                p[5],                              // className
                                 Boolean.parseBoolean(p[6].trim()), // status
-                                p[7], // address
-                                p[8]      // phone
+                                p[7],                              // address
+                                p[8]                               // phone
                         );
                         map.put(s.getId().toUpperCase(), s);
                     } catch (Exception e) {

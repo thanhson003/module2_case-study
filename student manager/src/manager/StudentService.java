@@ -101,11 +101,11 @@ public class StudentService {
             case "1":
                 System.out.print("Nhập ID sinh viên cần tìm: ");
                 String id = sc.nextLine().trim();
-                Student s = manager.findById(id);
+                Student hs = manager.findById(id);
 
-                if (s != null) {
+                if (hs != null) {
                     System.out.println(">>> ✅ Đã tìm thấy sinh viên:");
-                    System.out.println(s);
+                    System.out.println(hs);
                 } else {
                     System.out.println("❌ Không tìm thấy sinh viên nào có ID là: " + id);
                 }
@@ -152,65 +152,65 @@ public class StudentService {
 
         System.out.print("Nhập ID sinh viên cần sửa: ");
         String id = sc.nextLine().trim();
-        Student s = manager.findById(id);
+        Student hs = manager.findById(id);
 
-        if (s == null) {
+        if (hs == null) {
             System.err.println("❌ Không tìm thấy sinh viên có ID: " + id);
             return;
         }
 
-        System.out.println("--- Đang sửa sinh viên: " + s.getName() + " ---");
+        System.out.println("--- Đang sửa sinh viên: " + hs.getName() + " ---");
         System.out.println("(Nhấn Enter nếu muốn giữ nguyên thông tin cũ)");
 
         // 1. Sửa Tên
-        System.out.print("Tên mới [" + s.getName() + "]: ");
+        System.out.print("Tên mới [" + hs.getName() + "]: ");
         String newName = sc.nextLine().trim();
         if (!newName.isEmpty()) {
             if (validate.Validator.validate(newName, validate.Validator.NAME_REGEX)) {
-                s.setName(newName);
+                hs.setName(newName);
             } else {
                 System.err.println("⚠️ Tên sai định dạng, giữ lại tên cũ.");
             }
         }
 
         // 2. Sửa Giới tính
-        System.out.print("Giới tính mới [" + s.getGender() + "]: ");
+        System.out.print("Giới tính mới [" + hs.getGender() + "]: ");
         String newGender = sc.nextLine().trim();
         if (!newGender.isEmpty()) {
             if (newGender.equalsIgnoreCase("Nam") || newGender.equalsIgnoreCase("Nữ")) {
-                s.setGender(newGender.substring(0, 1).toUpperCase() + newGender.substring(1).toLowerCase());
+                hs.setGender(newGender.substring(0, 1).toUpperCase() + newGender.substring(1).toLowerCase());
             } else {
                 System.err.println("⚠️ Chỉ nhận Nam/Nữ, giữ lại giới tính cũ.");
             }
         }
 
         // 3. Sửa Email
-        System.out.print("Email mới [" + s.getEmail() + "]: ");
+        System.out.print("Email mới [" + hs.getEmail() + "]: ");
         String newEmail = sc.nextLine().trim();
         if (!newEmail.isEmpty()) {
             if (validate.Validator.validate(newEmail, validate.Validator.EMAIL_REGEX)) {
-                s.setEmail(newEmail);
+                hs.setEmail(newEmail);
             } else {
                 System.err.println("⚠️ Email sai định dạng, giữ lại email cũ.");
             }
         }
 
         // 4. Sửa Lớp
-        System.out.println("Lớp mới [" + s.getClassName() + "]: ");
+        System.out.println("Lớp mới [" + hs.getClassName() + "]: ");
         String newClass = sc.nextLine().trim();
-        if (!newClass.isEmpty()) s.setClassName(newClass);
+        if (!newClass.isEmpty()) hs.setClassName(newClass);
 
         // 5. Sửa Địa chỉ
-        System.out.print("Địa chỉ mới [" + s.getAddress() + "]: ");
+        System.out.print("Địa chỉ mới [" + hs.getAddress() + "]: ");
         String newAddr = sc.nextLine().trim();
-        if (!newAddr.isEmpty()) s.setAddress(newAddr);
+        if (!newAddr.isEmpty()) hs.setAddress(newAddr);
 
        //Sửa SDT
-        System.out.print("Số điện thoại mới [" + s.getPhoneNumber() + "]: ");
+        System.out.print("Số điện thoại mới [" + hs.getPhoneNumber() + "]: ");
         String newPhone = sc.nextLine().trim();
         if (!newPhone.isEmpty()) {
             if (validate.Validator.validate(newPhone, validate.Validator.PHONE_REGEX)) {
-                s.setPhoneNumber(String.valueOf(Integer.parseInt(newPhone)));
+                hs.setPhoneNumber(String.valueOf(Integer.parseInt(newPhone)));
             } else {
                 System.err.println("⚠️ SĐT phải có 10 số, giữ lại SĐT cũ.");
             }
@@ -225,9 +225,9 @@ public class StudentService {
 
         System.out.print("Nhập ID sinh viên cần thay đổi trạng thái: ");
         String id = sc.nextLine().trim();
-        Student s = manager.findById(id);
+        Student hs = manager.findById(id);
 
-        if (s == null) {
+        if (hs == null) {
             System.err.println("❌ Không tìm thấy sinh viên có ID: " + id);
             return;
         }
@@ -242,18 +242,18 @@ public class StudentService {
 
         switch (choice) {
             case "1":
-                s.setStatus(true);
+                hs.setStatus(true);
                 System.out.println("✅ Đã cập nhật: Đang học");
                 break;
             case "2":
-                s.setStatus(false);
+                hs.setStatus(false);
                 System.out.println("✅ Đã cập nhật: Bảo lưu");
             case "3":
-                s.setStatus(false);
+                hs.setStatus(false);
                 System.out.println("✅ Đã cập nhật: Đã nghỉ học");
                 break;
             case "4":
-                s.setStatus(false);
+                hs.setStatus(false);
                 System.out.println("✅ Đã cập nhật: Tốt nghiệp");
             case "":
                 System.out.println("⚠️ Bạn không chọn gì, trạng thái được giữ nguyên.");
@@ -272,11 +272,11 @@ public class StudentService {
 
         System.out.print("Nhập ID sinh viên muốn xóa: ");
         String id = sc.nextLine().trim();
-        Student s = manager.findById(id);
+        Student hs = manager.findById(id);
 
-        if (s != null) {
+        if (hs != null) {
             System.out.println("⚠️ Bạn đang yêu cầu xóa sinh viên sau:");
-            System.out.println(s);
+            System.out.println(hs);
 
             System.out.print("Bạn có chắc chắn muốn xóa không? (Nhập 'Y' để xóa, phím bất kỳ để hủy): ");
             String confirm = sc.nextLine().trim();
